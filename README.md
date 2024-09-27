@@ -1,1 +1,2 @@
-# stock-portfolio-group4
+# Stock Portfolio
+A simple stock portfolio project using API

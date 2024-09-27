@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Stock Portfolio</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="thedatepicker-2.2.0/dist/the-datepicker.css">
+    <link rel="stylesheet" href="main.css">
+  </head>
+
+  <body>
+    <button type="button" id="openModalBtn" class="btn btn-outline-dark col">
+      Change Key/Host
+    </button>
+
+      <!-- API MODAL -->
+  <div class="modal fade" id="APImodal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalLabel">Enter key and host</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <h5>Key</h5>
+            <input class="user-key" id="apiKey" value="d2fe19cdebmshffcb0a0ee9a9c36p16e57cjsn0393ba7168eb" style="width:100%"></input>
+            <h5>Host</h5>
+            <input class="user-host" id="hostKey" value="twelve-data1.p.rapidapi.com" style="width:100%"></input><br><br>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="saveKeysBtn" class="submit-info btn btn-secondary" data-bs-dismiss="modal">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="overload" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalLabel">Too many requests. Please wait up to one minute.</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary submit-user-info" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <div class="stockPortfolio">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <h1><center>Stock Portfolio</center></h1>
+          </div>
+        </div>
+      </div>
+
+      <div class="container initial">
+        <div class="row">
+            <center>
+              <span>Initial Amount:</span>
+              <input type="number" class="initial-amount" />
+              <button type="button" id="addStockBtn" class="add btn btn-outline-dark "> Add Stock</button>
+            </center>
+        </div>
+      </div>
+
+      <div class="container my-2 stock-list ">
+        <!-- <div class="secret col"><select class="select"></select></div> -->
+        <div class="stock row hidden">
+            <select class="select col-4"></select>
+            <input type="number" class="shares col-4" min="1" placeholder="Number of Stocks"/>
+            <div class="date-div col-4"><input class="date" placeholder="Date Purchased"/></div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="row">
+          <button
+            type="button"
+            id="submitStockBtn"
+            class="add btn btn-outline-dark col"
+            onclick="calculatePortfolioResult()"
+          >
+            Results
+          </button>
+        </div>
+      </div>
+
+      <div class="container portfolio-value">
+        <div id="portfolioResults"></div>
+      </div>
+    </div>
+
+    <div>
+      <code id="cookies"></code>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+    <script src="thedatepicker-2.2.0/dist/the-datepicker.js"></script>
+    <script src="main.js"></script>
+    <script>
+       inputs = document.getElementsByClassName('.date')
+       console.log(inputs)
+       input = document.querySelector('.date')
+        for (i = 0; i < inputs.length; i++){}
+       var datepicker = new TheDatepicker.Datepicker(input);
+       console.log(inputs.item(i))
+       const date = new Date();
+       datepicker.options.setMaxDate(date.toISOString().slice(0,10));
+       date.setFullYear(date.getFullYear() - 10);
+       datepicker.options.setFirstDayOfWeek(TheDatepicker.DayOfWeek.Sunday);
+       datepicker.options.setInputFormat("Y-m-d");
+       datepicker.options.addDateAvailabilityResolver(function(date){
+         return date.getDay() !== TheDatepicker.DayOfWeek.Saturday && date.getDay() !== TheDatepicker.DayOfWeek.Sunday
+      } )
+       datepicker.render();
+      
+    </script>
+  </body>
+</html>

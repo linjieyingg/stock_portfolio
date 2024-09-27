@@ -1,0 +1,16 @@
+{
+	"compilerOptions": {
+		"target": "ES5",
+		"module": "CommonJS",
+		"moduleResolution": "Node",
+		"esModuleInterop": true,
+		"noImplicitAny": true,
+		"removeComments": true,
+		"preserveConstEnums": true,
+		"rootDir": "./src/",
+		"declaration": true,
+		"declarationDir": "amd",
+		"forceConsistentCasingInFileNames": true
+	},
+	"include": ["src"]
+}
